@@ -8,7 +8,6 @@ export default defineConfig({
     alias: { "@": resolve(__dirname, "./src") },
     setupFiles: [
       "./tests/setupFiles/vitest.setup.ts",
-      "./tests/setupFiles/global.vitest.ts",
       "./tests/setupFiles/global.testing.library.ts"
     ]
   }
