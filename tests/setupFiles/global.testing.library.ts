@@ -1,4 +1,5 @@
 import { screen, render } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { afterAll, beforeAll } from "vitest";
 
 beforeAll(() => {
@@ -6,6 +7,8 @@ beforeAll(() => {
   global.render = render;
   // @ts-expect-error type
   global.screen = screen;
+  // @ts-expect-error type
+  global.userEvent = userEvent;
 });
 
 afterAll(() => {
