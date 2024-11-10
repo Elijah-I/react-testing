@@ -5,23 +5,37 @@ import {
   userLink,
   users
 } from "../mocks/UserList.mock";
+import { ComponentProps } from "react";
 
 describe("UserList", () => {
+  const renderComponent = (props: ComponentProps<typeof UserList>) => {
+    render(<UserList {...props} />);
+
+    return {
+      emptyPlaceholder: screen.queryByText(emptyPlaceholderText),
+      userItems: screen.queryAllByRole("link")
+    };
+  };
+
   it("should render <empty placeholder> when <users> is empty", () => {
-    render(<UserList users={emptyUsers} />);
-    expect(screen.getByText(emptyPlaceholderText)).toBeInTheDocument();
+    const { emptyPlaceholder } = renderComponent({ users: emptyUsers });
+
+    expect(emptyPlaceholder).toBeInTheDocument();
   });
 
   it("should not render <empty placeholder> when <users> is not empty", () => {
-    render(<UserList users={users} />);
-    expect(screen.queryByText(emptyPlaceholderText)).not.toBeInTheDocument();
+    const { emptyPlaceholder } = renderComponent({ users });
+
+    expect(emptyPlaceholder).not.toBeInTheDocument();
   });
 
   it("should render <users components> with correct links when <users> is not empty", () => {
-    render(<UserList users={users} />);
+    const { userItems } = renderComponent({ users });
 
-    users.forEach((user) => {
-      const userItem = screen.getByRole("link", { name: user.name });
+    expect(userItems).toHaveLength(users.length);
+
+    users.forEach((user, order) => {
+      const userItem = userItems[order];
 
       expect(userItem).toBeInTheDocument();
       expect(userItem).toHaveAttribute("href", userLink(user.id));
