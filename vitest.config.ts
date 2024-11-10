@@ -9,6 +9,13 @@ export default defineConfig({
     setupFiles: [
       "./tests/setupFiles/vitest.setup.ts",
       "./tests/setupFiles/global.testing.library.ts"
-    ]
+    ],
+    coverage: {
+      enabled: true,
+      provider: "istanbul",
+      reportsDirectory: "./tests/coverage",
+      reporter: ["html"],
+      include: ["src/components/**"]
+    }
   }
 });
