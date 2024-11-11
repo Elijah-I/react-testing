@@ -1,7 +1,13 @@
-import TermsAndConditions from "../components/TermsAndConditions";
+import SearchBox from "@/components/SearchBox";
 
 const PlaygroundPage = () => {
-  return <TermsAndConditions />;
+  return (
+    <SearchBox
+      onChange={(value) => {
+        console.log(value);
+      }}
+    />
+  );
 };
 
 export default PlaygroundPage;
