@@ -1,7 +1,13 @@
-import TagList from "@/components/TagList";
+import ToastDemo from "@/components/ToastDemo";
+import { Toaster } from "react-hot-toast";
 
 const PlaygroundPage = () => {
-  return <TagList />;
+  return (
+    <>
+      <ToastDemo />
+      <Toaster />
+    </>
+  );
 };
 
 export default PlaygroundPage;
