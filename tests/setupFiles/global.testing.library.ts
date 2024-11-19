@@ -1,6 +1,7 @@
 import { screen, render, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterAll, beforeAll } from "vitest";
+import ResizeObserver from "resize-observer-polyfill";
 
 beforeAll(() => {
   // @ts-expect-error type
@@ -11,6 +12,8 @@ beforeAll(() => {
   global.screen = screen;
   // @ts-expect-error type
   global.userEvent = userEvent;
+
+  global.ResizeObserver = ResizeObserver;
 
   global.matchMedia =
     global.matchMedia ||
