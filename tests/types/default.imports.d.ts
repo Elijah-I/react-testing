@@ -1,12 +1,14 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 type BaseRender = typeof render;
 type BaseScreen = typeof screen;
 type BaseUserEvent = typeof userEvent;
+type BaseWaitFor = typeof waitFor;
 
 declare global {
   interface Screen extends BaseScreen {}
   const render: BaseRender;
   const userEvent: BaseUserEvent;
+  const waitFor: BaseWaitFor;
 }
