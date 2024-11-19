@@ -13,10 +13,10 @@ beforeAll(() => {
   // @ts-expect-error type
   global.userEvent = userEvent;
 
-  global.ResizeObserver = ResizeObserver;
+  window.ResizeObserver = ResizeObserver;
 
-  global.matchMedia =
-    global.matchMedia ||
+  window.matchMedia =
+    window.matchMedia ||
     (() => ({
       writable: true,
       value: vi.fn().mockImplementation((query) => ({
@@ -30,6 +30,10 @@ beforeAll(() => {
         dispatchEvent: vi.fn()
       }))
     }));
+
+  window.HTMLElement.prototype.scrollIntoView = vi.fn();
+  window.HTMLElement.prototype.hasPointerCapture = vi.fn();
+  window.HTMLElement.prototype.releasePointerCapture = vi.fn();
 });
 
 afterAll(() => {
