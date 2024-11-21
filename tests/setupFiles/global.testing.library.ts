@@ -2,8 +2,11 @@ import { screen, render, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterAll, beforeAll } from "vitest";
 import ResizeObserver from "resize-observer-polyfill";
+import { server } from "../mocks";
 
 beforeAll(() => {
+  server.listen();
+
   // @ts-expect-error type
   global.waitFor = waitFor;
   // @ts-expect-error type
@@ -21,6 +24,7 @@ beforeAll(() => {
       writable: true,
       value: vi.fn().mockImplementation((query) => ({
         matches: false,
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         media: query,
         onchange: null,
         addListener: vi.fn(),
@@ -36,7 +40,13 @@ beforeAll(() => {
   window.HTMLElement.prototype.releasePointerCapture = vi.fn();
 });
 
+afterEach(() => {
+  server.resetHandlers();
+});
+
 afterAll(() => {
+  server.close();
+
   // @ts-expect-error type
   delete global.waitFor;
   // @ts-expect-error type
