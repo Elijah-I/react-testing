@@ -1,9 +1,7 @@
 import SearchBox from "@/components/SearchBox";
-import {
-  inputPlaceholder,
-  inputSearchText,
-  onChangeArguments
-} from "../mocks/SearchBox.mock";
+import { SearchBoxMock } from "../mocks";
+
+const { inputPlaceholder, inputSearchText, onChangeArguments } = SearchBoxMock;
 
 describe("SearchBox", () => {
   const renderSearchBox = () => {

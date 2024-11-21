@@ -1,6 +1,8 @@
 import Greet from "@/components/Greet";
-import { loginButtonText, name } from "../mocks/Greet.mock";
+import { GreetMock } from "../mocks";
 import { ComponentProps } from "react";
+
+const { loginButtonText, name } = GreetMock;
 
 describe("Greet", () => {
   const renderComponent = (props?: ComponentProps<typeof Greet>) => {

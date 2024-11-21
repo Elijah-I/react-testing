@@ -1,5 +1,7 @@
 import TermsAndConditions from "@/components/TermsAndConditions";
-import { headerText } from "../mocks/TermsAndConditions.mock";
+import { TermsAndConditionsMock } from "../mocks";
+
+const { headerText } = TermsAndConditionsMock;
 
 describe("TermsAndConditions", () => {
   const renderComponent = () => {

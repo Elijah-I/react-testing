@@ -1,13 +1,15 @@
 import ExpandableText from "@/components/ExpandableText";
-import {
+import { ExpandableTextMock } from "../mocks";
+import type { ComponentProps } from "react";
+
+const {
   longText,
   shortText,
   showLessText,
   showMoreText,
   textLimit,
   truncatedText
-} from "../mocks/ExpandableText.mock";
-import type { ComponentProps } from "react";
+} = ExpandableTextMock;
 
 describe("ExpandableText", () => {
   const renderComponent = (props: ComponentProps<typeof ExpandableText>) => {

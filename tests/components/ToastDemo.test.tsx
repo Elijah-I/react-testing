@@ -1,6 +1,8 @@
 import ToastDemo from "@/components/ToastDemo";
 import { Toaster } from "react-hot-toast";
-import { toastButtonText, toastText } from "../mocks/ToastDemo.mock";
+import { ToastDemoMock } from "../mocks";
+
+const { toastButtonText, toastText } = ToastDemoMock;
 
 describe("ToastDemo", () => {
   const renderToastDemo = () => {

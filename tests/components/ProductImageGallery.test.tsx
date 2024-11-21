@@ -1,6 +1,8 @@
 import ProductImageGallery from "@/components/ProductImageGallery";
-import { emptyImageUrls, imageUrls } from "../mocks/ProductImageGallery.mock";
+import { ProductImageGalleryMock } from "../mocks";
 import { ComponentProps } from "react";
+
+const { emptyImageUrls, imageUrls } = ProductImageGalleryMock;
 
 describe("ProductImageGallery", () => {
   const renderComponent = (

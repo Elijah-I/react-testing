@@ -1,11 +1,8 @@
 import UserList from "@/components/UserList";
-import {
-  emptyPlaceholderText,
-  emptyUsers,
-  userLink,
-  users
-} from "../mocks/UserList.mock";
+import { UserListMock } from "../mocks";
 import { ComponentProps } from "react";
+
+const { emptyPlaceholderText, emptyUsers, userLink, users } = UserListMock;
 
 describe("UserList", () => {
   const renderComponent = (props: ComponentProps<typeof UserList>) => {

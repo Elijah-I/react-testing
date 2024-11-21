@@ -1,9 +1,8 @@
 import { Theme } from "@radix-ui/themes";
-import {
-  defaultSelectedIndex,
-  selectOptions
-} from "../mocks/OrderStatusSelector.mock";
+import { OrderStatusSelectorMock } from "../mocks";
 import OrderStatusSelector from "@/components/OrderStatusSelector";
+
+const { defaultSelectedIndex, selectOptions } = OrderStatusSelectorMock;
 
 describe("OrderStatusSelector", () => {
   const renderOrderStatusSelector = () => {

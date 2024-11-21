@@ -1,6 +1,8 @@
 import UserAccount from "@/components/UserAccount";
 import { ComponentProps } from "react";
-import { admin, editButtonText, user } from "../mocks/UserAccount.mock";
+import { UserAccountMock } from "../mocks";
+
+const { admin, editButtonText, user } = UserAccountMock;
 
 describe("UserAccount", () => {
   const renderComponent = (props: ComponentProps<typeof UserAccount>) => {
