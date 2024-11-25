@@ -1,8 +1,8 @@
 import { Product } from "@/entities";
+import { db } from "../db";
 import { createGetRequest } from "./createGetRequest";
-import { productList } from "../db";
 
 export const getProducts = createGetRequest<Product[]>({
   url: "/products",
-  response: productList
+  response: db.product.getAll()
 });

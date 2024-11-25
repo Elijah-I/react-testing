@@ -1,16 +1,11 @@
 import ProductDetail from "@/components/ProductDetail";
 import type { ComponentProps } from "react";
-import {
-  createGetRequestError,
-  ProductDetailMock,
-  productList,
-  server
-} from "../mocks";
+import { createGetRequestError, db, ProductDetailMock, server } from "../mocks";
 
 const { errorText, loaderText, emptyPlaceholderText } = ProductDetailMock;
 
 describe("ProductDetail", () => {
-  const productItem = productList[0];
+  const productItem = db.product.getAll()[0];
 
   const renderProductDetail = (props: ComponentProps<typeof ProductDetail>) => {
     render(<ProductDetail {...props} />);
