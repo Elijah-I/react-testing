@@ -1,6 +1,7 @@
 export * as ExpandableTextMock from "./ExpandableText.mock";
 export * as GreetMock from "./Greet.mock";
 export * as OrderStatusSelectorMock from "./OrderStatusSelector.mock";
+export * as ProductDetailMock from "./ProductDetail.mock";
 export * as ProductImageGalleryMock from "./ProductImageGallery.mock";
 export * as ProductListMock from "./ProductList.mock";
 export * as SearchBoxMock from "./SearchBox.mock";
