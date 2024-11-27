@@ -1,12 +1,19 @@
-import { type DefaultBodyType, http, HttpResponse } from "msw";
+import { type DefaultBodyType, delay, http, HttpResponse } from "msw";
 
 type Arguments<Response> = {
   url: string;
   response: Response;
+  sleep?: boolean | number;
 };
 
 export const createGetRequest = <Response extends DefaultBodyType>({
   url,
-  response
+  response,
+  sleep
 }: Arguments<Response>) =>
-  http.get(url, () => HttpResponse.json<Response>(response));
+  http.get(url, async () => {
+    if (sleep) {
+      await delay(typeof sleep === "number" ? sleep : undefined);
+    }
+    return HttpResponse.json<Response>(response);
+  });

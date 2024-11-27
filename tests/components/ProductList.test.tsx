@@ -1,8 +1,12 @@
 import ProductList from "@/components/ProductList";
-import { createGetRequest, ProductListMock, server } from "../mocks";
-import { Product } from "@/entities";
+import {
+  createGetRequest,
+  createGetRequestError,
+  ProductListMock,
+  server
+} from "../mocks";
 
-const { loaderText, emptyPlaceholderText } = ProductListMock;
+const { errorText, loaderText, emptyPlaceholderText } = ProductListMock;
 
 describe("ProductList", () => {
   const renderProductList = () => {
@@ -12,31 +16,46 @@ describe("ProductList", () => {
   it("should render list of <products>", async () => {
     renderProductList();
 
-    const products = await screen.findAllByRole("listitem");
-
-    expect(products.length).toBeGreaterThan(0);
+    expect((await screen.findAllByRole("listitem")).length).toBeGreaterThan(0);
   });
 
   it("should render <empty placeholder> if no products found", async () => {
+    server.use(createGetRequest({ url: "/products", response: [] }));
+
+    renderProductList();
+
+    expect(await screen.findByText(emptyPlaceholderText)).toBeInTheDocument();
+  });
+
+  it("should show <loader> while loading <product list>", async () => {
     server.use(
-      createGetRequest<Product[]>({
-        url: "/products",
-        response: []
-      })
+      createGetRequest({ url: "/products", response: [], sleep: true })
     );
 
     renderProductList();
 
-    const emptyPlaceholder = await screen.findByText(emptyPlaceholderText);
-
-    expect(emptyPlaceholder).toBeInTheDocument();
+    expect(await screen.findByText(loaderText)).toBeInTheDocument();
   });
 
-  it("should show <loader> while loading product list", () => {
+  it("should remove <loader> after <product list> is loaded", async () => {
     renderProductList();
 
-    const loader = screen.getByText(loaderText);
+    await waitForElementToBeRemoved(() => screen.queryByText(loaderText));
+  });
 
-    expect(loader).toBeInTheDocument();
+  it("should remove <loader> if fetch failed", async () => {
+    server.use(createGetRequestError({ url: "/products" }));
+
+    renderProductList();
+
+    await waitForElementToBeRemoved(() => screen.queryByText(loaderText));
+  });
+
+  it("should render <Error> if fetch failed", async () => {
+    server.use(createGetRequestError({ url: "/products" }));
+
+    renderProductList();
+
+    expect(await screen.findByText(errorText)).toBeInTheDocument();
   });
 });
