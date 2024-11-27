@@ -1,4 +1,9 @@
-import { screen, render, waitFor } from "@testing-library/react";
+import {
+  screen,
+  render,
+  waitFor,
+  waitForElementToBeRemoved
+} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterAll, beforeAll } from "vitest";
 import ResizeObserver from "resize-observer-polyfill";
@@ -15,6 +20,8 @@ beforeAll(() => {
   global.screen = screen;
   // @ts-expect-error type
   global.userEvent = userEvent;
+  // @ts-expect-error type
+  global.waitForElementToBeRemoved = waitForElementToBeRemoved;
 
   window.ResizeObserver = ResizeObserver;
 
@@ -55,4 +62,6 @@ afterAll(() => {
   delete global.screen;
   // @ts-expect-error type
   delete global.userEvent;
+  // @ts-expect-error type
+  delete global.waitForElementToBeRemoved;
 });
