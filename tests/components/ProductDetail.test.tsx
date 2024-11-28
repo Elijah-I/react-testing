@@ -1,6 +1,7 @@
 import ProductDetail from "@/components/ProductDetail";
 import type { ComponentProps } from "react";
 import { createGetRequestError, db, ProductDetailMock, server } from "../mocks";
+import { QueryClientProvider } from "../providers";
 
 const { errorText, loaderText, emptyPlaceholderText } = ProductDetailMock;
 
@@ -8,7 +9,7 @@ describe("ProductDetail", () => {
   const productItem = db.product.getAll()[0];
 
   const renderProductDetail = (props: ComponentProps<typeof ProductDetail>) => {
-    render(<ProductDetail {...props} />);
+    render(<ProductDetail {...props} />, { wrapper: QueryClientProvider });
   };
 
   it("should render <Product> with <Name> and <Price>", async () => {
