@@ -1,5 +1,4 @@
 import { setupServer } from "msw/node";
-import { getProducts } from "./getProducts";
-import { getProduct } from "./getProduct";
+import { db } from "../db";
 
-export const server = setupServer(getProducts, getProduct);
+export const server = setupServer(...db.product.toHandlers("rest"));
