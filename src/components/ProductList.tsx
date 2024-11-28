@@ -1,38 +1,27 @@
-import axios, { AxiosError } from "axios";
-import { useEffect, useState } from "react";
-import { Product } from "../entities";
+import type { Product } from "@/entities";
+import axios from "axios";
+import { useQuery } from "react-query";
 
 const ProductList = () => {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [isLoading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        setLoading(true);
-        const { data } = await axios.get<Product[]>("/products");
-        setProducts(data);
-        setLoading(false);
-      } catch (error) {
-        setLoading(false);
-        if (error instanceof AxiosError) setError(error.message);
-        else setError("An unexpected error occurred");
-      }
-    };
-
-    void fetchProducts();
-  }, []);
+  const {
+    data: products,
+    isLoading,
+    error
+  } = useQuery<Product[], Error>({
+    queryKey: ["products"],
+    queryFn: () =>
+      axios.get<Product[]>("/products").then((response) => response.data)
+  });
 
   if (isLoading) return <div>Loading...</div>;
 
-  if (error) return <div>Error: {error}</div>;
+  if (error) return <div>Error: {error.message}</div>;
 
-  if (products.length === 0) return <p>No products available.</p>;
+  if (products!.length === 0) return <p>No products available.</p>;
 
   return (
     <ul>
-      {products.map((product) => (
+      {products!.map((product) => (
         <li key={product.id}>{product.name}</li>
       ))}
     </ul>

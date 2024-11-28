@@ -5,12 +5,13 @@ import {
   ProductListMock,
   server
 } from "../mocks";
+import { QueryClientProvider } from "../providers";
 
 const { errorText, loaderText, emptyPlaceholderText } = ProductListMock;
 
 describe("ProductList", () => {
   const renderProductList = () => {
-    render(<ProductList />);
+    render(<ProductList />, { wrapper: QueryClientProvider });
   };
 
   it("should render list of <products>", async () => {
