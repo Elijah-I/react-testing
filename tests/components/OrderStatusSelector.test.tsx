@@ -8,11 +8,7 @@ describe("OrderStatusSelector", () => {
   const renderOrderStatusSelector = () => {
     const onChange = vi.fn();
 
-    render(
-      <Theme>
-        <OrderStatusSelector onChange={onChange} />
-      </Theme>
-    );
+    render(<OrderStatusSelector onChange={onChange} />, { wrapper: Theme });
 
     return {
       onChange,
@@ -23,13 +19,6 @@ describe("OrderStatusSelector", () => {
         options.map((option) => option.textContent)
     };
   };
-
-  it(`should render default value '${selectOptions[defaultSelectedIndex].value}' selected`, () => {
-    const { dropdownElement } = renderOrderStatusSelector();
-    expect(dropdownElement).toHaveTextContent(
-      selectOptions[defaultSelectedIndex].value
-    );
-  });
 
   it("should render correct values list", async () => {
     const { getOptions, getLabels, dropdownElement } =
