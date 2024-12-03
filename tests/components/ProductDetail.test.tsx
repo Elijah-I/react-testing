@@ -1,6 +1,6 @@
 import ProductDetail from "@/components/ProductDetail";
 import type { ComponentProps } from "react";
-import { createGetRequestError, db, ProductDetailMock, server } from "../mocks";
+import { db, ProductDetailMock, simulateRequestError } from "../mocks";
 import { QueryClientProvider } from "../providers";
 
 const { errorText, loaderText, emptyPlaceholderText } = ProductDetailMock;
@@ -38,7 +38,8 @@ describe("ProductDetail", () => {
   });
 
   it("should render <Error> if fetch failed", async () => {
-    server.use(createGetRequestError({ url: "/products/:id" }));
+    simulateRequestError("/products/:id");
+
     renderProductDetail({ productId: productItem.id });
 
     const error = await screen.findByText(errorText);

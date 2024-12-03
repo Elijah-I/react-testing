@@ -1,9 +1,9 @@
 import ProductList from "@/components/ProductList";
 import {
-  createGetRequest,
-  createGetRequestError,
   ProductListMock,
-  server
+  simulateRequestDelay,
+  simulateRequestEmpty,
+  simulateRequestError
 } from "../mocks";
 import { QueryClientProvider } from "../providers";
 
@@ -21,7 +21,7 @@ describe("ProductList", () => {
   });
 
   it("should render <empty placeholder> if no products found", async () => {
-    server.use(createGetRequest({ url: "/products", response: [] }));
+    simulateRequestEmpty("/products");
 
     renderProductList();
 
@@ -29,9 +29,7 @@ describe("ProductList", () => {
   });
 
   it("should show <loader> while loading <product list>", async () => {
-    server.use(
-      createGetRequest({ url: "/products", response: [], sleep: true })
-    );
+    simulateRequestDelay("/products");
 
     renderProductList();
 
@@ -45,7 +43,7 @@ describe("ProductList", () => {
   });
 
   it("should remove <loader> if fetch failed", async () => {
-    server.use(createGetRequestError({ url: "/products" }));
+    simulateRequestError("/products");
 
     renderProductList();
 
@@ -53,7 +51,7 @@ describe("ProductList", () => {
   });
 
   it("should render <Error> if fetch failed", async () => {
-    server.use(createGetRequestError({ url: "/products" }));
+    simulateRequestError("/products");
 
     renderProductList();
 
