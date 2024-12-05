@@ -18,6 +18,8 @@ module.exports = {
     "react-refresh/only-export-components": [
       "warn",
       { allowConstantExport: true }
-    ]
+    ],
+    include: ["vite.config.ts", "vitest.config.ts"],
+    ignores: ["**/node_modules/", "**/dist/"]
   }
 };
