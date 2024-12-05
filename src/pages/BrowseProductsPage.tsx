@@ -43,15 +43,22 @@ function BrowseProducts() {
         setCategoriesLoading(false);
       }
     };
-    fetchCategories();
-    fetchProducts();
+    void fetchCategories();
+    void fetchProducts();
   }, []);
 
   if (errorProducts) return <div>Error: {errorProducts}</div>;
 
   const renderCategories = () => {
-    if (isCategoriesLoading) return <Skeleton />;
-    if (errorCategories) return <div>Error: {errorCategories}</div>;
+    if (isCategoriesLoading)
+      return (
+        <div role="progressbar" aria-label="Loading categories">
+          <Skeleton />
+        </div>
+      );
+
+    if (errorCategories) return null;
+
     return (
       <Select.Root
         onValueChange={(categoryId) =>
@@ -92,7 +99,11 @@ function BrowseProducts() {
             <Table.ColumnHeaderCell></Table.ColumnHeaderCell>
           </Table.Row>
         </Table.Header>
-        <Table.Body>
+
+        <Table.Body
+          role={isProductsLoading ? "progressbar" : undefined}
+          aria-label={isProductsLoading ? "Loading products" : undefined}
+        >
           {isProductsLoading &&
             skeletons.map((skeleton) => (
               <Table.Row key={skeleton}>
@@ -107,6 +118,7 @@ function BrowseProducts() {
                 </Table.Cell>
               </Table.Row>
             ))}
+
           {!isProductsLoading &&
             visibleProducts.map((product) => (
               <Table.Row key={product.id}>

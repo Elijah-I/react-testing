@@ -1,12 +1,13 @@
 /* eslint-disable @typescript-eslint/unbound-method */
-import { Product } from "@/entities";
+import type { Product } from "@/entities";
 import { faker } from "@faker-js/faker";
-import { primaryKey } from "@mswjs/data";
+import { oneOf, primaryKey } from "@mswjs/data";
 import { TypedDbObject } from "../types";
 
-export const product: TypedDbObject<Product> = {
+export const product: TypedDbObject<Product, "category"> = {
   id: primaryKey(faker.number.int),
   categoryId: faker.number.int,
   name: faker.commerce.productName,
-  price: () => faker.number.int({ min: 1, max: 100 })
+  price: () => faker.number.int({ min: 1, max: 100 }),
+  category: oneOf("category")
 };

@@ -6,6 +6,7 @@ const QuantitySelector = ({ product }: { product: Product }) => {
   const { getItem, addToCart, removeFromCart } = useCart();
 
   const cartItem = getItem(product);
+
   if (!cartItem)
     return <Button onClick={() => addToCart(product)}>Add to Cart</Button>;
 

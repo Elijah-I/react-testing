@@ -1,3 +1,4 @@
+export * as BrowseProductsPageMock from "./BrowseProductsPage.mock";
 export * as ExpandableTextMock from "./ExpandableText.mock";
 export * as GreetMock from "./Greet.mock";
 export * as OrderStatusSelectorMock from "./OrderStatusSelector.mock";
