@@ -15,7 +15,8 @@ export default defineConfig({
       provider: "istanbul",
       reportsDirectory: "./tests/coverage",
       reporter: ["html"],
-      include: ["src/components/**"]
+      include: ["src/components/**", "src/pages/**"],
+      exclude: ["src/pages/admin/**"]
     }
   }
 });
