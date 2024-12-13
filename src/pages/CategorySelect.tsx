@@ -1,6 +1,7 @@
-import { Category } from "@/entities";
+import type { Category } from "@/entities";
 import { Select } from "@radix-ui/themes";
-import axios, { AxiosError } from "axios";
+import type { AxiosError } from "axios";
+import axios from "axios";
 import Skeleton from "react-loading-skeleton";
 import { useQuery } from "react-query";
 
@@ -15,7 +16,8 @@ export const CategorySelect = ({ onChange }: Props) => {
     error: errorCategories
   } = useQuery<Category[], AxiosError>({
     queryKey: ["CATEGORIES"],
-    queryFn: () => axios.get("/categories").then((response) => response.data)
+    queryFn: () =>
+      axios.get<Category[]>("/categories").then((response) => response.data)
   });
 
   if (isCategoriesLoading)

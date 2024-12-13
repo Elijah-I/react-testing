@@ -19,7 +19,8 @@ module.exports = {
       "warn",
       { allowConstantExport: true }
     ],
-    include: ["vite.config.ts", "vitest.config.ts"],
-    ignores: ["**/node_modules/", "**/dist/"]
+    "@typescript-eslint/consistent-type-imports": "error"
+    // include: ["vite.config.ts", "vitest.config.ts"],
+    // ignores: ["**/node_modules/", "**/dist/"]
   }
 };
