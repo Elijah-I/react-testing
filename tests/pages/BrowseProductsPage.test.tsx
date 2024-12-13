@@ -10,6 +10,7 @@ import {
   simulateRequestError
 } from "../mocks";
 import type { Product } from "@/entities";
+import { QueryClientProvider } from "../providers";
 
 const { errorText, allOptionText, categoriesSkeleton, productsSkeleton } =
   BrowseProductsPageMock;
@@ -134,7 +135,9 @@ describe("BrowseProductsPage", () => {
 const renderBrowseProductsPage = () => {
   const wrapper = ({ children }: PropsWithChildren) => (
     <Theme>
-      <CartProvider>{children}</CartProvider>
+      <CartProvider>
+        <QueryClientProvider>{children}</QueryClientProvider>
+      </CartProvider>
     </Theme>
   );
 
