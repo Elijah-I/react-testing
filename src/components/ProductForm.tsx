@@ -3,12 +3,10 @@ import { Box, Button, Select, TextField } from "@radix-ui/themes";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { Product } from "../entities";
+import type { Product } from "../entities";
 import useCategories from "../hooks/useCategories";
-import {
-  ProductFormData,
-  productFormSchema,
-} from "../validationSchemas/productSchema";
+import type { ProductFormData } from "../validationSchemas/productSchema";
+import { productFormSchema } from "../validationSchemas/productSchema";
 import ErrorMessage from "./ErrorMessage";
 
 interface Props {
@@ -24,10 +22,10 @@ const ProductForm = ({ product, onSubmit }: Props) => {
     register,
     handleSubmit,
     control,
-    formState: { errors },
+    formState: { errors }
   } = useForm<ProductFormData>({
     defaultValues: product,
-    resolver: zodResolver(productFormSchema),
+    resolver: zodResolver(productFormSchema)
   });
 
   if (isLoading) return <div>Loading...</div>;
@@ -35,6 +33,7 @@ const ProductForm = ({ product, onSubmit }: Props) => {
   return (
     <form
       name="product"
+      // eslint-disable-next-line @typescript-eslint/no-misused-promises
       onSubmit={handleSubmit(async (formData) => {
         try {
           setSubmitting(true);
@@ -49,7 +48,12 @@ const ProductForm = ({ product, onSubmit }: Props) => {
     >
       <Box>
         <TextField.Root className="max-w-sm">
-          <TextField.Input placeholder="Name" {...register("name")} size="3" />
+          <TextField.Input
+            autoFocus
+            placeholder="Name"
+            {...register("name")}
+            size="3"
+          />
         </TextField.Root>
         <ErrorMessage error={errors.name} />
       </Box>
@@ -75,7 +79,7 @@ const ProductForm = ({ product, onSubmit }: Props) => {
               defaultValue={product?.categoryId.toString() || ""}
               onValueChange={(value) => field.onChange(+value)}
             >
-              <Select.Trigger placeholder="Category" />
+              <Select.Trigger aria-label="Category" placeholder="Category" />
               <Select.Content>
                 <Select.Group>
                   {categories?.map((category) => (
