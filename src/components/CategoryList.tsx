@@ -1,18 +1,22 @@
-import { useEffect } from "react";
-import { fetchCategories } from "../store/categorySlice";
-import { useAppDispatch, useAppSelector } from "../store/hooks";
+import type { Category } from "@/entities";
+import type { AxiosError } from "axios";
+import axios from "axios";
+import { useQuery } from "react-query";
 
 function CategoryList() {
-  const dispatch = useAppDispatch();
-  const categories = useAppSelector((state) => state.category.list);
-  const loading = useAppSelector((state) => state.category.loading);
-  const error = useAppSelector((state) => state.category.error);
+  const {
+    data: categories = [],
+    isFetching: loading,
+    error
+  } = useQuery<Category[], AxiosError>({
+    queryKey: "SELECT_CATEGORIES",
+    queryFn: async () => {
+      const { data } = await axios.get<Category[]>("/categories");
+      return data;
+    }
+  });
 
-  useEffect(() => {
-    dispatch(fetchCategories());
-  }, [dispatch]);
-
-  if (error) return <div>Error: {error}</div>;
+  if (error) return <div>Error: {error.message}</div>;
 
   return (
     <div>
@@ -21,7 +25,7 @@ function CategoryList() {
         <div>Loading...</div>
       ) : (
         <ul>
-          {categories!.map((category) => (
+          {categories.map((category) => (
             <li key={category.id}>{category.name}</li>
           ))}
         </ul>

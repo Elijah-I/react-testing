@@ -1,7 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import type { AxiosError } from "axios";
 import axios from "axios";
-import { Category } from "../entities";
-import { RootState } from "./store";
+import type { Category } from "../entities";
+import type { RootState } from "./store";
 
 export interface CategoryState {
   list: Category[];
@@ -12,21 +13,22 @@ export interface CategoryState {
 const initialState: CategoryState = {
   list: [],
   loading: false,
-  error: null,
+  error: null
 };
 
-export const fetchCategories = createAsyncThunk<Category[]>(
-  "categories/fetch",
-  async () => {
-    const { data } = await axios.get("/categories");
-    return data;
-  }
-);
+export const fetchCategories = createAsyncThunk<
+  Category[],
+  void,
+  { rejectValue: AxiosError }
+>("categories/fetch", async () => {
+  const { data } = await axios.get<Category[]>("/categories");
+  return data;
+});
 
-export const createCategory = createAsyncThunk(
+export const createCategory = createAsyncThunk<Category, string>(
   "categories/create",
   async (name: string) => {
-    const { data } = await axios.post("/categories", { name });
+    const { data } = await axios.post<Category>("/categories", { name });
     return data;
   }
 );
@@ -45,10 +47,10 @@ export const categorySlice = createSlice({
     });
     builder.addCase(fetchCategories.rejected, (state, action) => {
       state.loading = false;
-      state.error = action.error.message!;
+      state.error = action.error.message || null;
     });
   },
-  reducers: {},
+  reducers: {}
 });
 
 export const categorySelector = (state: RootState) => state.category;
