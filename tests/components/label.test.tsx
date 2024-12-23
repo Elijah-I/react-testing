@@ -42,7 +42,7 @@ describe("Label", () => {
     }
   );
 
-  it.only("should throw an error if given an invalid labelId", () => {
+  it("should throw an error if given an invalid labelId", () => {
     const invalidLanguageCase = {
       labelId: "invalid",
       language: Language.en,
