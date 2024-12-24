@@ -5,11 +5,16 @@ import {
   waitForElementToBeRemoved
 } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import type { PropsWithChildren, ReactNode } from "react";
 import ResizeObserver from "resize-observer-polyfill";
 import { afterAll, beforeAll } from "vitest";
 import { server } from "../mocks";
 
-vi.mock("@auth0/auth0-react");
+vi.mock("@auth0/auth0-react", () => ({
+  useAuth0: vi.fn(),
+  Auth0Provider: ({ children }: PropsWithChildren) => children,
+  withAuthenticationRequired: (component: ReactNode) => component
+}));
 
 beforeAll(() => {
   server.listen();

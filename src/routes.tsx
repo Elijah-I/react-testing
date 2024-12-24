@@ -1,4 +1,4 @@
-import { RouteObject } from "react-router-dom";
+import type { RouteObject } from "react-router-dom";
 import App from "./App.tsx";
 import ErrorPage from "./pages/ErrorPage.tsx";
 import HomePage from "./pages/HomePage.tsx";
@@ -28,11 +28,11 @@ const routes: RouteObject[] = [
           { index: true, element: <AdminHomePage /> },
           { path: "products", element: <AdminProductListPage /> },
           { path: "products/new", element: <NewProductPage /> },
-          { path: "products/:id/edit", element: <EditProductPage /> },
-        ],
-      },
-    ],
-  },
+          { path: "products/:id/edit", element: <EditProductPage /> }
+        ]
+      }
+    ]
+  }
 ];
 
 export default routes;
