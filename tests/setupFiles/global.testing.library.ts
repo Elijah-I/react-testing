@@ -1,13 +1,15 @@
 import {
-  screen,
   render,
+  screen,
   waitFor,
   waitForElementToBeRemoved
 } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { afterAll, beforeAll } from "vitest";
 import ResizeObserver from "resize-observer-polyfill";
+import { afterAll, beforeAll } from "vitest";
 import { server } from "../mocks";
+
+vi.mock("@auth0/auth0-react");
 
 beforeAll(() => {
   server.listen();
