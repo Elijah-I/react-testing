@@ -6,14 +6,11 @@ export default defineConfig({
     environment: "jsdom",
     globals: true,
     alias: { "@": resolve(__dirname, "./src") },
-    setupFiles: [
-      "./tests/setupFiles/vitest.setup.ts",
-      "./tests/setupFiles/global.testing.library.ts"
-    ],
+    setupFiles: ["tests/setupFiles/vitest.config.ts"],
     coverage: {
       enabled: true,
       provider: "istanbul",
-      reportsDirectory: "./tests/coverage",
+      reportsDirectory: "./coverage",
       reporter: ["html"],
       include: ["src/components/**", "src/pages/**"],
       exclude: ["src/pages/admin/**"]
