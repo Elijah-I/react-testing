@@ -1,6 +1,6 @@
 import { Theme } from "@radix-ui/themes";
 import "@radix-ui/themes/styles.css";
-import { PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
 import AuthProvider from "./AuthProvider";
 import { CartProvider } from "./CartProvider";
 import ReactQueryProvider from "./ReactQueryProvider";
