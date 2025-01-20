@@ -1,6 +1,7 @@
 import { Theme } from "@radix-ui/themes";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { getAsRegExp } from "../../tests/utils";
 import OrderStatusSelector from "./OrderStatusSelector";
 
 describe("OrderStatusSelector", () => {
@@ -54,8 +55,6 @@ describe("OrderStatusSelector", () => {
     expect(selectElement).toHaveTextContent(getAsRegExp(secondOption));
   });
 });
-
-const getAsRegExp = (text: string): RegExp => new RegExp(text, "i");
 
 const renderOrderStatusSelector = () => {
   const onChange = vi.fn();
