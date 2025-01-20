@@ -8,7 +8,8 @@ export default defineConfig({
     alias: { "@": resolve(__dirname, "./src") },
     setupFiles: [
       "tests/setupFiles/vitest.config.ts",
-      "tests/setupFiles/server.config.ts"
+      "tests/setupFiles/server.config.ts",
+      "tests/setupFiles/http.errors.ts"
     ],
     coverage: {
       enabled: true,
