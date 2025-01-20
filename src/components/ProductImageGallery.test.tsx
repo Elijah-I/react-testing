@@ -25,7 +25,9 @@ describe("ProductImageGallery", () => {
 });
 
 const getImageUrls = (amount: number): ImageUrl[] =>
-  Array<ImageUrl>(amount).fill(`url_${Math.random()}`);
+  Array(amount)
+    .fill(0)
+    .map(() => `url_${Math.random()}`);
 
 type ProductImageGalleryProps = ComponentProps<typeof ProductImageGallery>;
 type ImageUrl = ProductImageGalleryProps["imageUrls"][number];
