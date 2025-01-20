@@ -6,7 +6,10 @@ export default defineConfig({
     environment: "jsdom",
     globals: true,
     alias: { "@": resolve(__dirname, "./src") },
-    setupFiles: ["tests/setupFiles/vitest.config.ts"],
+    setupFiles: [
+      "tests/setupFiles/vitest.config.ts",
+      "tests/setupFiles/server.config.ts"
+    ],
     coverage: {
       enabled: true,
       provider: "istanbul",
